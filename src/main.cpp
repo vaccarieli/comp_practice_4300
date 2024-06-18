@@ -76,13 +76,23 @@ int main(int argc, char* argv[])
     // creat sfml circle shape based on our parameters
     sf::CircleShape circle(circleRadius, circleSegments); // create a circle with shape with radius 50
 
+    // zelda.loadFromFile("/bin/tloz/stand_up.png");
+
+    sf::Texture texture;
+    texture.loadFromFile("./bin/tloz/stand_up.png");
+
+    sf::Sprite sprite;
+    sprite.setTexture(texture);
+
     circle.setPosition(10.0f, 10.0f);
+
+    sprite.setPosition(20.0f, 20.0f);
 
     // let's load a font so we can display some text
     sf::Font myFont;
 
     // attempt to load the font from a file
-    if(!myFont.loadFromFile("bin/fonts/tech.ttf"))
+    if(!myFont.loadFromFile("bin/fonts/arial.ttf"))
     {
         // if we can't load the font, print an error to the error console and exit
         std::cerr << "Could not load font!" << std::endl;
@@ -165,15 +175,19 @@ int main(int argc, char* argv[])
         circle.setPointCount(circleSegments);
         circle.setRadius(circleRadius);
 
-        // basic animation - move the each frame if it's still in frame 
-        circle.setPosition(circle.getPosition().x + circleSpeedX, circle.getPosition().y + circleSpeedY);
+        // // basic animation - move the each frame if it's still in frame 
+        // circle.setPosition(circle.getPosition().x + circleSpeedX, circle.getPosition().y + circleSpeedY);
+        // resetPositionVars(circleSpeedX, circleSpeedY);
+
+        sprite.setPosition(sprite.getPosition().x + circleSpeedX, sprite.getPosition().y + circleSpeedY);
         resetPositionVars(circleSpeedX, circleSpeedY);
 
         // basic rendering function calls 
         window.clear(); // clear the window of any previous drawn
         if(drawCircle) // draw the circle if true
         {
-            window.draw(circle);
+            // window.draw(circle);
+            window.draw(sprite);
         }
         if(drawText) // draw the text if true
         {
